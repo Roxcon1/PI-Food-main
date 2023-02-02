@@ -13,7 +13,7 @@ function App() {
       
       <Route exact path="/home" render={() => <Main></Main>}/>
       <Route exact path="/create"  render={() => <Form></Form>}/>
-      <Route exact path="/detail"  render={() => <Detail></Detail>}/>
+      <Route exact path="/detail/:id"  render={() => <Detail></Detail>}/>
       <Route exact path="/"  render={() => <Landing></Landing>}/>
     </div>
   );

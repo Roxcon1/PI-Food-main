@@ -3,18 +3,19 @@ import axios from "axios"
  
 export const GET_RECIPES = "GET_RECIPES"
 export const GET_RECIPE = "GET_RECIPE"
-export const NAME_RECIPES = "NAME_RECIPES"
-export const FILTER_RECIPES = "FILTER_RECIPES"
-export const ORDER_RECIPES = "ORDER_RECIPES"
+export const GET_DIETS = "GET_DIETS"
+
 
 export const getRecipes = () => {
     return async function(dispatch){
         const APIRecipes = await axios.get(
-        "http://localhost:3001/recipes");
+        "http://localhost:3001/recipes").catch(function(error){dispatch({type:GET_RECIPES, payload:{error:"error"}})});;
         const recipes = APIRecipes.data;
         dispatch({type:GET_RECIPES, payload:recipes});
     }
 }
+
+
 
 export const getRecipe = (id) => {
     return async function(dispatch){
@@ -24,24 +25,10 @@ export const getRecipe = (id) => {
     }
 }
 
-export const getRecipeName  = (name) => {
+export const getDiets = () => {
     return async function(dispatch){
-    const APIRecipe = await axios.get(`http://localhost:3001/recipes/?name=${name}`);
-    const recipe = APIRecipe.data
-    dispatch({type:NAME_RECIPES, payload:recipe})
-    }
-}
-
-export const filterRecipes = (diet) => {
-    return async function(dispatch){
-    const recipes = []
-    dispatch({type:FILTER_RECIPES, payload:recipes})
-    }
-}
-
-export const orderRecipes = (alphabetic, health) => {
-    return async function(dispatch){
-    const recipes = []
-    dispatch({type:ORDER_RECIPES, payload:recipes})
-    }
+        const ApiDiets = await axios.get(`http://localhost:3001/diets`);
+        const diets = ApiDiets.data
+        dispatch({type:GET_DIETS, payload:diets})
+    } 
 }

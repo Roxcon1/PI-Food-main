@@ -1,0 +1,26 @@
+const patterns = {
+            name: {
+                pattern: /^\S[a-zA-Z\s]{1,20}\S$/,
+                errorMessage: "The Name of your Recipe must have letters from A to Z"
+            },
+            summary: {
+                pattern: /^[a-zA-ZÀ-ÿ0-9\s]{25,500}$/u,
+                errorMessage: "Your summary must be between 50 and 500 characters long"
+            },
+            healthScore: {
+                pattern: /^([1-9][0-9]|100)$/,
+                errorMessage: "Score must be between 1 and 100"
+            },
+            image: {
+                pattern: /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?.*(png|jpg|jpeg|gif)$/,
+                errorMessage: "You must enter an image with a url (https) and in jpg, jpeg, png or gif format."
+            },
+            steps: {
+                pattern: /^[a-zA-ZÀ-ÿ0-9\s]{25,500}$/u,
+                errorMessage: "your steps must be between 50 and 500 characters long"
+            },
+            diets: {
+                pattern: /^.+$/,
+                errorMessage: `Add a type of diet e.g. "vegan".`
+            }
+        }
