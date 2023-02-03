@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios"
+import style from "./Form.module.css"
 
 const Form = () => {
 
@@ -9,7 +10,6 @@ const Form = () => {
         healthscore:0,
         image:"",
         steps:"",
-        diets: []
 
     })
 
@@ -19,7 +19,6 @@ const Form = () => {
         healthscore:0,
         image:"",
         steps:"",
-        diets: []
 
     })
 
@@ -73,50 +72,64 @@ const Form = () => {
     const submitHandler = (event) => {
         event.preventDefault()
         console.log(form)
-        /*axios.post("http://localhost:3001/recipes", form)
+        axios.post("http://localhost:3001/recipes", form)
         .then((res)=>alert(res))
-        .catch(err => alert(err))*/
+        .catch(err => alert(err))
 
     }
 
     return(
-        <form onSubmit={submitHandler}>
+        <div className={style.background}>
+            <link rel="preconnect" href="https://fonts.googleapis.com"/>
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true"/>
+            <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet"/>
+            
+        <form onSubmit={submitHandler} >
+            <p className={style.titleMain}>Create your own Recipe!</p>
             <div>
-                <label>Nombre de la Receta</label>
-                    <input type="text" value={form.name} onChange={changeHandler} name="name"/>
-                     {errors.name && <span>{errors.name}</span>} 
+                <p className={style.title}>Recipe's title</p>
+                <div className={style.divInput}>
+                    <input className={style.input} type="text" value={form.name} onChange={changeHandler} name="name"/>
+                     {errors.name && <span>{errors.name}</span>}
+                </div>
             </div>
 
             <div>
-                <label>Resumen de el Plato</label>
-                    <input type="text" value={form.summary} onChange={changeHandler} name="summary"/>
+                <p className={style.title}>Recipe's Summary</p>
+                <div className={style.divInput}>
+                    <input className={style.input} type="text" value={form.summary} onChange={changeHandler} name="summary"/>
                      {errors.summary && <span>{errors.summary}</span>} 
+                     </div>
             </div>
 
             <div>
-                <label>Puntaje de Salud de la Receta</label>
-                    <input type="number" value={form.healthscore} onChange={changeHandler} name="healthscore"/>
+                <p className={style.title}>HealthScore</p>
+                <div className={style.divInput}>
+                    <input className={style.input} type="number" value={form.healthscore} onChange={changeHandler} name="healthscore"/>
                      {errors.healthscore && <span>{errors.healthscore}</span>} 
-                
+                     </div>
             </div>
 
             <div>
-                <label>Imagen de la Comida</label>
-                    <input type="text" value={form.image} onChange={changeHandler} name="image"/>
+                <p className={style.title}>Recipe's Picture</p>
+                <div className={style.divInput}>
+                    <input className={style.input} type="text" value={form.image} onChange={changeHandler} name="image"/>
                      {errors.image && <span>{errors.image}</span>} 
-                
+                     </div>
             </div>
 
             <div>
-                <label>Paso a Paso</label>
-                    <input type="text" value={form.steps} onChange={changeHandler} name="steps"/>
+                <p className={style.title}>Step by Step</p>
+                <div className={style.divInput}>
+                    <input className={style.input} type="text" value={form.steps} onChange={changeHandler} name="steps"/>
                      {errors.steps && <span>{errors.steps}</span>} 
+                     </div>
             </div>
             <div>
-                <button type="submit">Enviar Receta</button>
-                <button type="reset">Limpiar el Formulario</button>
+                <button className={style.Buttons} type="submit">Create Recipe</button>
             </div>
         </form>
+        </div>
     )
 }
 

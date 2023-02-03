@@ -1,10 +1,126 @@
-.container{
-    border: 5px solid black;
+.centerAlign{
     display: flex;
-    text-align: center;
-    justify-content: center;
-    flex-direction: column;
-    border-radius: 15px;
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: 1em;
+    justify-content: center;
+
+}
+
+.menus{
+    background: #fed597;
+    display: flex;
+    justify-content: center;
+    align-items: top;
+    flex-wrap: wrap;
+    padding-bottom: 1em;
+}
+.wholePage{
+    width: 100%;
+    height: 100%;
+    font-family: 'Fjalla One', sans-serif;
+    background-image: url("../../images/MainBG.svg");
+    background: linear-gradient(rgb(254, 213, 151), rgba(144, 43, 0, 0.8)), url("../../images/MainBG.svg");
+    filter: blur(0.5);
+}
+
+.dropdown{
+    min-width: 12em;
+    position: relative;
+    margin: 2em;
+
+}
+
+.select{
+    background: rgb(245, 243, 214);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 30px;
+    margin-top: 0.5;
+    width: 80%;
+    border: 2px rgb(245, 243, 214) solid;
+    border-radius: 0.5em;
+    padding: 1em;
+}
+
+.select:hover{
+    transition: 0.3s;
+    background: rgb(255, 203, 120);
+    cursor: pointer;
+    display: block;
+}
+
+.select-clicked{
+    cursor: pointer;
+    box-shadow: 0 0 0.8em ;
+}
+
+.menu{
+    list-style: none;
+    padding: 0.2em 0.5em;
+    background-color: rgba(249, 143, 23, 0.903);
+    border: 2px rgba(249, 143, 23, 0.903) solid;
+    border-radius: 0.5em;
+    box-shadow: 0 0.5em 1em rgb(0, 0, 0);
+    position: absolute;
+    top: 2.44em;
+    left: 50%;
+    width: 100%;
+    transform: translateX(-50%);
+    transition: 0.5s;
+    display: none;
+}
+
+.select:hover ul{
+    transition: 0.5s;
+    display: block;
+}
+
+.menu li{
+    display: inline-block;
+    width: 100%;
+    position: relative;
+}
+
+.menu li button{
+    display: block;
+    padding: 20px 25px;
+    text-decoration: none;
+    text-align: center;
+}
+
+.innerButtons{
+    display: block;
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1em;
+    background-color: rgb(245, 243, 214);
+    padding: 0.5em;
+    border: 0.1em rgb(245, 243, 214)solid;
+    border-radius: 0.5em;
+    box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.2);
+
+}
+
+.innerButtons:hover{
+    transition: 0.3s;
+    background: rgb(255, 203, 120);
+    cursor: pointer;
+    display: block;
+}
+
+.input{
+    padding-top: 1em;
+    border: rgb(255, 203, 120) 1em;
+    background-color: rgb(245, 243, 214);
+    position: relative;
+    border-radius: 5px;
+    font-size: 20px;
+}
+
+.parameter{
+    border: #b2ddc6 solid 1em;
+    border-radius: 5px;
 }

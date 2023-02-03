@@ -10,7 +10,6 @@ import LoadPg from "../../Views/Load Page/Load";
 const CardsContainer = () => {
 const [currentPage, setCurrentPage] = useState(0) 
 const [search, setSearch] = useState('')
-const [dietSearch, setDietSearch] = useState('')
 
 const dietsGlobal = useSelector(state=>state.diets)
 
@@ -19,10 +18,9 @@ console.log(dietsGlobal)
 const recipesGlobal = useSelector(state=>state.recipes);
 const num = 1;
 
-if (!recipesGlobal.length) return (
-    <LoadPg></LoadPg>
-)
-
+const reload = () => {
+    setCurrentPage(0)
+}
 
 const nextPage = () => {
     if( recipesGlobal.filter( food => food.food_name.includes( search )).length > currentPage + 9)
@@ -40,35 +38,40 @@ const searchOnChange = ({target}) => {
 
 };
 const alphabeticOrder = () => {
-    setCurrentPage(1)
+    setCurrentPage(currentPage + 9)
+    reload()
     return recipesGlobal.sort((a, b) => {
         return a.food_name > b.food_name ? 1 : -1
 })
 };
 
 const oppositeAlphabetic = () => {
-    setCurrentPage(1)
+    setCurrentPage(currentPage + 9)
+    reload()
     return recipesGlobal.sort((a, b) => {
         return a.food_name < b.food_name ? 1 : -1    
 }).slice(currentPage, currentPage + 9)
 };
 
 const unHealthy = () => {
-    setCurrentPage(1)
+    setCurrentPage(currentPage + 9)
+    reload()
     return recipesGlobal.sort((a, b) => {
         return a.food_healthScore > b.food_healthScore ? 1 : -1
 }).slice(currentPage, currentPage + 9)
 };
 
 const healthy = () => {
-    setCurrentPage(1)
+    setCurrentPage(currentPage + 9)
+    reload()
     return recipesGlobal.sort((a, b) => {
         return a.food_healthScore < b.food_healthScore ? 1 : -1
 }).slice(currentPage, currentPage + 9)
 };
 
 const filterByDiets = ({target}) => {
-    setCurrentPage(1)
+    setCurrentPage(currentPage + 9)
+    reload()
     const diet = target.value
     console.log(recipesGlobal)
     if(!diet) return recipesGlobal
@@ -83,34 +86,68 @@ const filterRecipes = () => {
     return filtered.slice(currentPage, currentPage + 9)
     }
 };
-
-const reload = () => {
-    setCurrentPage(0)
-}
     return (
-        <div key={num + 1} className={style.container}>
-            <div>
-                <button onClick={alphabeticOrder}>Aa-Zz</button>
-                <button onClick={reload}>r</button>
-                <button onClick={oppositeAlphabetic}>Zz-Aa</button>
+    <div key={num + 1} className={style.wholePage}>
+        <div className={style.menus}>
+            <input className={style.input} type="text" placeholder="  Search Recipe by Name" value={search} onChange={searchOnChange}/>
+        </div>
+            
+        <div className={style.menus}>
+            <div className={style.dropdown}>
+                <div className={style.select}>
+                    <span >Name</span>
+                    <div></div>
+                
+                <ul className={style.menu}>
+                    <li>
+                        <button className={style.innerButtons} onClick={alphabeticOrder}>Asending Alphabetic Order</button>
+                    </li>
+                    <li>
+                        <button className={style.innerButtons} onClick={oppositeAlphabetic}>Desending Alphabetic Order</button>
+                    </li>
+                </ul>
+                </div>
             </div>
-            <div>
+
+            <div className={style.dropdown}>
+            <div className={style.select}>
+                    <span className={style.inSelect}>Diet</span>
+                    <div className={style.caret}></div>
+                <ul className={style.menu}>
             {dietsGlobal.map(diet => {
-                return <button onClick={filterByDiets} value={diet.diet_name}>{diet.diet_name}</button>
+                return (<li>
+                <button className={style.innerButtons} onClick={filterByDiets} value={diet.diet_name}>{diet.diet_name}</button>
+                </li>
+                )
             })}
+            </ul> 
             </div>
-            <div>
-                <button onClick={healthy}>Healthy</button>
-                <button onClick={unHealthy}>unHealthy</button>
             </div>
-            <div>
-                <input type="text" placeholder="Buscar Recetas por Nombre" value={search} onChange={searchOnChange}/>
+            <div className={style.dropdown}>
+                <div className={style.select}>
+                    <span className={style.inSelect}>HealthScore</span>
+                    <div className={style.caret}></div>
+                
+                <ul className={style.menu}>
+                    <li>
+                         <button className={style.innerButtons} onClick={healthy}><p>Asending HealthScore</p></button>
+                    </li>
+                    <li>
+                        <button className={style.innerButtons} onClick={unHealthy}>Desending HealthScore</button>
+                    </li>
+                </ul>
+                </div>
+                </div>
             </div>
-            <div>
-                <button onClick={prevPage}>Anterior</button>
-                <button onClick={nextPage}>Siguiente</button>
+
+
+            
+
+            <div className={style.menus}>
+                <button className={style.innerButtons} onClick={prevPage}>Prev</button>
+                <button className={style.innerButtons} onClick={nextPage}>Next</button>
             </div>
-        
+            <div className={style.centerAlign}>
             {filterRecipes(recipesGlobal).map(recipe => {
                 return <Card
                 Id={recipe.food_id}
@@ -121,6 +158,7 @@ const reload = () => {
                 diets={recipe.diets}
                 />
             })}
+            </div>
         </div>
     )
 }
